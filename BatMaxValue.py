@@ -95,7 +95,13 @@ def yarasa(pop_size, iterations, alpha, gama):
       
       # Ri(t+1) = Rmaxt  . [1- 0.5. gama ^ iterasyon no]
       pulse_rate[i] = 1.0 - 0.5 * gama**counter
-      
+# write results to file
+    with open("yarasa_sonuclar.txt", "w") as fp:
+        fp.write("Optimum x=%4.4f \n" % best_solution_x )
+        fp.write("Maximum target function=%4.4f \n" % best_solution)
+    print("Bat algorithm completed")
+    
+    return best_solution, best_solution_x     
 
   # return best solution
   return best_solution, best_solution_x
