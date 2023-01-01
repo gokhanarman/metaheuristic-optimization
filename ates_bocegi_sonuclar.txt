@@ -1,0 +1,2 @@
+Optimum x=2.8515 
+Maximum target function=-1.8584 
