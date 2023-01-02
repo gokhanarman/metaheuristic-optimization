@@ -1,2 +1,4 @@
-Optimum x=1.5995 
-Maximum target function=0.0043 
+Optimum x=1.6030286449 
+Maximum target function=0.0107591559 
+Populasyon Sayisi=100 
+Iterasyon Sayisi=100 

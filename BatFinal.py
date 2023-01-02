@@ -20,6 +20,7 @@ Bu iki çizgi grafiğin üzerine çizilir ve kılavuz çizgiler gösterilir. Son
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+from pytictoc import TicToc
 
 x = np.arange(1, 2, 0.001)
 y1 = x**2 - 1
@@ -31,10 +32,10 @@ plt.show()
 
 import random
 
-
+t = TicToc() #create instance of class
 # y = x^2 - 1 ve y = sqrt(5 - x^2)
 # abs((x^2 - 1) - sqrt(5 - x^2)) denklemini 0 yapmalı
-
+t.tic() #Start timer
 def optimize(x):
     
   return abs((x**2 - 1) - (math.sqrt(5 - pow(x,2))))
@@ -76,7 +77,7 @@ def yarasa(pop_size, iterations, alpha, gama):
     pulse_rate[i] = random.uniform(0.5, 1) # Random [0.5,1] For Pulse Rates
 
   #%% main loop
-  while counter <= iterations:
+  for _ in range(iterations):
     # generate random population
     for i in range(pop_size):
       pop[i] = random.uniform(1, 2) # random x in range [0, 10]
@@ -123,14 +124,21 @@ def yarasa(pop_size, iterations, alpha, gama):
       # Ri(t+1) = Rmaxt  . [1- 0.5. gama ^ iterasyon no]
       pulse_rate[i] = 1.0 - 0.5 * gama**counter
       
-    print(f"Optimum x = {best_solution_x:.4f}")
-    print(f"Minimum hedef fonksiyonu = {best_solution:.4f}")
+    # print(f"Optimum x = {best_solution_x:.4f}")
+    # print(f"Minimum hedef fonksiyonu = {best_solution:.4f}")
     # write results to file
     with open("yarasa_sonuclar.txt", "w") as fp:
-        fp.write("Optimum x=%4.4f \n" % best_solution_x )
-        fp.write("Maximum target function=%4.4f \n" % best_solution)
+        fp.write("Optimum x=%4.10f \n" % best_solution_x )
+        fp.write("Maximum target function=%4.10f \n" % best_solution)
+        fp.write("Populasyon Sayisi=%d \n" % pop_size)
+        fp.write("Iterasyon Sayisi=%d \n" % iterations)
+        
     print("Bat algorithm completed")
+    return print(best_solution_x, best_solution)
+
+    
         
   
 # test the yarasa function
-yarasa(20, 20, 0.95, 0.95)
+yarasa(100, 100, 0.9, 0.9)
+t.toc() #Time elapsed since t.tic()
